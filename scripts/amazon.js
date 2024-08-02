@@ -61,6 +61,8 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
 
         const productId = button.dataset.productId;
         let matchingItem;
+        let cartQuantity = 0;
+
 
         cart.forEach((item) => {
           if(item.productId === productId){
@@ -78,6 +80,14 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
           cart.push({productId, quantity: 1});
 
         }
+
+
+        cart.forEach((item) => {
+          cartQuantity += item.quantity;
+        });
+
+        document.querySelector('.cart-quantity').innerHTML = cartQuantity;
+        console.log(cartQuantity);
         console.log(cart);
 
     })
