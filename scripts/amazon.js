@@ -1,5 +1,7 @@
-// uses product data from data/products.js
+import {cart} from '../data/cart.js';
+import {products} from '../data/products.js';
 
+// uses product data from data/products.js
 let productsHTML = '';
 
 products.forEach((product) => {
