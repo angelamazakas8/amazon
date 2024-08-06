@@ -20,9 +20,8 @@ function saveToStorage() {
 }
 
 export function addToCart(productId) {
+
     let matchingItem;
-
-
 
     cart.forEach((item) => {
       if(item.productId === productId){
@@ -76,4 +75,18 @@ export function removeFromCart(productId) {
   cart = newCart;
   // save updated cart to local storage
   saveToStorage();
+}
+
+export function updateDeliveryOption(productId, deliveryOptionID) {
+    let matchingItem;
+
+    cart.forEach((item) => {
+      if(item.productId === productId){
+        matchingItem = item;
+      }
+    });
+
+    matchingItem.deliveryOptionID = deliveryOptionID;
+
+    saveToStorage();
 }
