@@ -14,12 +14,10 @@ export function renderPaymentSummary(){
         shippingCostPriceCents += deliveryOption.priceCents;
     });
 
-    console.log(productCostCents);
-    console.log(shippingCostPriceCents);
     const totalBeforeTax = productCostCents + shippingCostPriceCents;
     const taxCents = totalBeforeTax * 0.1;
     const totalCents = totalBeforeTax + taxCents;
-    console.log(totalCents);
+
 
     const paymentSummaryHTML = 
     `
