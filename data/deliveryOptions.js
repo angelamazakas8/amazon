@@ -1,3 +1,4 @@
+
 export const deliveryOptions = [{
     id: '1',
     deliveryDays: 7,
@@ -12,3 +13,17 @@ export const deliveryOptions = [{
     deliveryDays: 1,
     priceCents: 999
 }]
+
+export function getDeliveryOption(deliveryOptionID) {
+    let deliveryOption;
+
+    deliveryOptions.forEach((option) => {
+        if (option.id === deliveryOptionID) {
+            deliveryOption = option;
+            
+        } 
+    });
+
+    // if delivery Option not found, use default of id: 1
+    return deliveryOption || deliveryOptions[0];
+}
