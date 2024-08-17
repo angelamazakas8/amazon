@@ -1,5 +1,5 @@
 // using code to test code
-import { formatCurrency } from "../scripts/utils/money.js";
+import { formatCurrency } from "../../scripts/utils/money.js";
 console.log('test suite: formatCurrency')
 
 if (formatCurrency(2095) === '20.95')
