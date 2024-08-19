@@ -34,7 +34,33 @@ class Product {
     return `$${formatCurrency(this.priceCents)}`;
 
   }
+
+  extraInfoHTML() {
+    return '';
+  }
 }
+
+class Clothing extends Product {
+ sizeChartLink;
+
+ constructor(productDetails) {
+  // super calls Product classes constructor (Product is the parent class)
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink;
+ }
+
+ // target = "_blank" means open in new tab
+ // overrides the '' in the parent class
+ // has link to size chart for clothing items
+ extraInfoHTML() {
+  // super can also access the parent classes' methods
+  // super.extraInfoHTML
+  return `
+    <a href="${this.sizeChartLink}" target="_blank">Size Chart</a>
+  `;
+ }
+}
+
 
 // we use map() on the array to apply the function on all the objects
 // to convert the array objects into the Product class
@@ -698,6 +724,11 @@ export const products = [
     ]
   }
 ].map((productDetails) => {
+
+  if (productDetails.type === 'clothing'){
+    // convert to clothing class
+    return new Clothing(productDetails);
+  }
   return new Product(productDetails);
 });
 
