@@ -18,6 +18,8 @@ export function loadFromStorage() {
   }
 }
 
+
+
 // save cart to local storage, so it doesn't change when page is refreshed
 function saveToStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));

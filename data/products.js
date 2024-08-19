@@ -61,9 +61,33 @@ class Clothing extends Product {
  }
 }
 
+export let products = [];
+export function loadProducts(fun) {
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener('load', () => {
+    products = JSON.parse(xhr.response).map((productDetails) => {
+
+      if (productDetails.type === 'clothing'){
+        // convert to clothing class
+        return new Clothing(productDetails);
+      }
+      return new Product(productDetails);
+    });
+    console.log(products);
+
+    // run the function
+    // this function is renderProductsGrid() in the amazon.js file
+    // the function must be ran after the call, in order to get the products first
+    fun();
+  })
+  xhr.open('GET', 'https://supersimplebackend.dev/products');
+  xhr.send();
+}
+
 
 // we use map() on the array to apply the function on all the objects
 // to convert the array objects into the Product class
+/*
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -733,3 +757,4 @@ export const products = [
 });
 
 // console.log(products)
+*/
