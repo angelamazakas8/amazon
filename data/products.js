@@ -80,7 +80,7 @@ export function loadProducts(fun) {
     // the function must be ran after the call, in order to get the products first
     fun();
   })
-  xhr.open('GET', 'https://supersimplebackend.dev/products');
+  xhr.open('GET', 'https://angelamazakas8.github.io/simple-backend/products.json');
   xhr.send();
 }
 
