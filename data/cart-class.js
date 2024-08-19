@@ -1,15 +1,16 @@
 class Cart{
     cartItems;
-    localStorageKey;
+    // localStorageKey is private
+    #localStorageKey;
 
     // constructor for creating objects
     constructor(localStorageKey) {
-        this.localStorageKey = localStorageKey;
-        this.loadFromStorage();
+        this.#localStorageKey = localStorageKey;
+        this.#loadFromStorage();
     }
-    loadFromStorage() {
+    #loadFromStorage() {
         // cart.cartItems is the same as this.cartItems in this context
-        this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+        this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
       
         if (!this.cartItems) {
             this.cartItems = [{
@@ -27,7 +28,7 @@ class Cart{
 
     // save cart to local storage, so it doesn't change when page is refreshed
     saveToStorage() {
-        localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+        localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
     }
     
     addToCart(productId) {
@@ -89,7 +90,7 @@ class Cart{
         })
     }
 
-      updateDeliveryOption(productId, deliveryOptionID) {
+    updateDeliveryOption(productId, deliveryOptionID) {
         let matchingItem;
     
         this.cartItems.forEach((item) => {
@@ -108,7 +109,8 @@ class Cart{
   const cart = new Cart('cart-oop');
   const buisnessCart = new Cart('cart-business');
 
-
+  // check to make sure it the localStorageKey actually private, cannot be changed
+ // cart.#localStorageKey = 'test';
   
 
   //cart.addToCart('8c9c52b5-5a19-4bcb-a5d1-158a74287c53');
