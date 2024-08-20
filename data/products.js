@@ -79,6 +79,8 @@ export function loadProductsFetch() {
       return new Product(productDetails);
     });
     console.log(products);
+  }).catch(() => {
+    console.log('unexpected error')  
   });
 
   return promise;
@@ -106,6 +108,10 @@ export function loadProducts(fun) {
     // this function is renderProductsGrid() in the amazon.js file
     // the function must be ran after the call, in order to get the products first
     fun();
+
+    xhr.addEventListener('error', (error) => {
+      console.log('unexpected error')
+    })
   })
   xhr.open('GET', 'https://angelamazakas8.github.io/simple-backend/products.json');
   xhr.send();

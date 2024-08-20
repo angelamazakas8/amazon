@@ -8,6 +8,7 @@ import { loadCart } from "../data/cart.js";
 // async makes a function return a promise
 async function loadPage() {
 
+    try {
     // await allows us to write asynchronous code as normal code
     // waits for code to finish before going to next line
     await loadProductsFetch();
@@ -17,6 +18,10 @@ async function loadPage() {
             resolve();
         });
     });
+    
+    } catch (error) {
+        console.log('unexpected error');
+    }
 
     renderOrderSummary();
     renderPaymentSummary();  
