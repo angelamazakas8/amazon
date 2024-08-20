@@ -62,6 +62,33 @@ class Clothing extends Product {
 }
 
 export let products = [];
+
+export function loadProductsFetch() {
+  const promise = fetch(
+    'https://angelamazakas8.github.io/simple-backend/products.json'
+  ).then((response) => {
+    return response.json();
+  }).then((productsData) => {
+    // don't need to parse
+    products = productsData.map((productDetails) => {
+
+      if (productDetails.type === 'clothing'){
+        // convert to clothing class
+        return new Clothing(productDetails);
+      }
+      return new Product(productDetails);
+    });
+    console.log(products);
+  });
+
+  return promise;
+}
+
+/*
+loadProductsFetch().then(() => {
+  console.log('next step');
+});
+*/
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', () => {
