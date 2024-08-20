@@ -5,10 +5,29 @@ import { loadCart } from "../data/cart.js";
 // import '../data/cart-class.js';
 //import '../data/backend-practice.js'
 
+// async makes a function return a promise
+async function loadPage() {
+
+    // await allows us to write asynchronous code as normal code
+    // waits for code to finish before going to next line
+    await loadProductsFetch();
+
+    await new Promise((resolve) => {
+        loadCart(() => {
+            resolve();
+        });
+    });
+
+    renderOrderSummary();
+    renderPaymentSummary();  
+}
+
+loadPage();
 
 // using promises to avoid too much nesting
 // Promise.all waits for all of the promises before going to next step
 // load products and cart, then render page
+/*
 Promise.all([
     loadProductsFetch(),
     new Promise((resolve) => {
@@ -21,7 +40,7 @@ Promise.all([
     renderOrderSummary();
     renderPaymentSummary();   
 });
-
+*/
 /*
 new Promise((resolve) => {
     loadProducts(() => {
