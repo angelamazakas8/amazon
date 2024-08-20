@@ -1,4 +1,4 @@
-
+// for delivery, there are 3 shipping options to chose from
 export const deliveryOptions = [{
     id: '1',
     deliveryDays: 7,

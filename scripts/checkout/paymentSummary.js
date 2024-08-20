@@ -58,29 +58,45 @@ export function renderPaymentSummary(){
 
     document.querySelector('.payment-summary').innerHTML = paymentSummaryHTML;
 
-    // for placing an order, send the cart details to the backend
+    // for placing an order, send the cart details to the backend, then go to orders page
     document.querySelector('.place-order-button').addEventListener('click', async () => {
 
+      // 2 second timeout
+      const timeout = 2000; 
+    
+      // if it times out due to not having a good URL or other issue
+      const timeoutPromise = new Promise((resolve, reject) =>
+        setTimeout(() => reject(new Error('Request timed out')), timeout)
+      );
+    
+      // send data to the backend
+      // use your own website/hosting here! 
+      const fetchPromise = fetch('', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ cart: cart })
+      });
+    
       try {
-        // send json data to the backend
-        const response = await fetch('https://supersimplebackend.dev/orders', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            cart: cart
-          })
-        });
-
-      const order = await response.json();
-      console.log(order);
-      addOrder(order);
-
+        const response = await Promise.race([fetchPromise, timeoutPromise]);
+    
+        if (!response.ok) {
+          console.log('Bad response');
+          throw new Error('Error occured: Bad network response');
+        }
+    
+        const order = await response.json();
+        console.log('Order received:', order);
+        addOrder(order);
+        window.location.href = 'orders.html';
+    
       } catch (error) {
-        console.log('unexpected error')
+        console.log('Unexpected error, saving order to localStorage instead:', error);
+        localStorage.setItem('pendingOrder', JSON.stringify(cart));
+        window.location.href = 'orders.html';
       }
-
-      window.location.href = 'orders.html';
     });
+    
 }

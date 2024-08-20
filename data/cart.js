@@ -4,6 +4,7 @@ loadFromStorage();
 export function loadFromStorage() {
   cart = JSON.parse(localStorage.getItem('cart'));
 
+  // if no cart, fill with a couple of items
   if (!cart) {
       cart = [{
       productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
@@ -18,9 +19,7 @@ export function loadFromStorage() {
   }
 }
 
-
-
-// save cart to local storage, so it doesn't change when page is refreshed
+// save cart to local storage
 function saveToStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
@@ -97,6 +96,7 @@ export function updateDeliveryOption(productId, deliveryOptionID) {
     saveToStorage();
 }
 
+// just trying as an example (remove later)
 export function loadCart(fun) {
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', () => {
@@ -104,6 +104,6 @@ export function loadCart(fun) {
     console.log(xhr.response);
     fun();
   })
-  xhr.open('GET', 'https://supersimplebackend.dev/cart');
+  xhr.open('GET', 'https://angelamazakas8.github.io/simple-backend/cart.txt');
   xhr.send();
 }
