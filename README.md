@@ -2,7 +2,7 @@ This Javascript project also uses HTML and CSS to create a mock version of amazo
 
 This project uses async functions and promises. 
 
-![(images/homepage.JPG)]
-![(images/checkout.JPG)]
-![(images/orders.JPG)]
-![(images/tracking.JPG)]
+![](images/homepage.JPG)
+![](images/checkout.JPG)
+![](images/orders.JPG)
+![](images/tracking.JPG)
